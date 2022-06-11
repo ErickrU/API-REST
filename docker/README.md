@@ -21,7 +21,7 @@ From requirements, if you want install something whith pip add one line with the
 #### BUILD AN IMAGE FROM A DOCKERFILE AND CREATE A CONTAINER
 
 
-Build an image from a `Dockerfile`, 
+Build an image from a `Dockerfile` 
 
 > Note: you must be in the same path as the `Dockerfile` at least in this command in specific
 
