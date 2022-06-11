@@ -8,4 +8,4 @@ create table clientes(
 
 insert into clientes(nombre, email) values ("Erick","Erick@gmail.com");
 insert into clientes(nombre, email) values ("Yael","yael@gmail.com");
-insert into clientes(nombre, email) values ("michelle","michelle@gmail.com");
+insert into clientes(nombre, email) values ("Michelle","Michelle@gmail.com");
