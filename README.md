@@ -1,6 +1,12 @@
 # API-REST
 
-Desarrollo de una API RESTFUL con contenedores en 'DOCKER' con una imagen custom para un Backend en 'Python' y librerias todos los elementos mas detallados en su respectiva carpeta
+
+<img align="left" width="auto" height="150" src="https://i.postimg.cc/V6RzrBk2/index.png">
+
+<img align="center" width="auto" height="150" src="https://i.postimg.cc/66bNkQ2V/index2.png">
+
+
+This project is made with docker, fastapi and other powerful libraries trying to bring all the good programming practices and set a professional develop.
 
 ## License
 

@@ -14,7 +14,7 @@ insert into clientes(nombre, email) values ("Yael","yael@gmail.com");
 insert into clientes(nombre, email) values ("Michelle","Michelle@gmail.com");
 ```
 
-The structure for `SQL` sentences are the same
+> The structure for `SQL` sentences are the same
 
 Create a database base from a script
 

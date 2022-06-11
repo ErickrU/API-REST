@@ -17,6 +17,7 @@ From requirements, if you want install something whith pip add one line with the
 - flake8==4.0.1
 - isort==5.10.1
 - mypy==0.961
+- requests==2.28.0
 
 #### BUILD AN IMAGE FROM A DOCKERFILE AND CREATE A CONTAINER
 
@@ -49,7 +50,7 @@ and for an image
 
 now if you are out from a container you can get in with 
 
-    docker start -i apirest apirest
+    docker start -i apirest
 
 
 If you make some changes and want to create a new image from a container you can use 
