@@ -6,7 +6,7 @@
 <img align="center" width="" height="130px" src="https://i.postimg.cc/66bNkQ2V/index2.png">
 
 
-This project is made with docker, fastapi and other powerful libraries trying to bring all the good programming practices and set a professional develop.
+This project is done with docker, fast API and other powerful libraries, trying to bring all the good programming practices and set up professional development.
 
 ## License
 
