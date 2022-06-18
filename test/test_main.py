@@ -1,7 +1,7 @@
 from urllib import response
 from fastapi.testclient import TestClient
 
-from main import app
+from code.main import app
 
 client = TestClient(app)
 
