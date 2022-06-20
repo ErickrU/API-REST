@@ -10,8 +10,14 @@ to be able to run uvicorn server you have to run this command in the same path w
 
     uvicorn main:app --reload
 
+also you can use:
+
+    uvicorn code.main:app --reload
+
+you can make a folder with py files into a module creating an `__init__.py` file in the current path where your py files are located if you do it now you can can run uvicron server from /home
+
 > The command uvicorn main:app refers to:
-> - main: the file main.py (the Python "module").
+> - main: the file main.py (the Python "module"), code. refer to the dir that is indexed
 > - app: the object created inside of main.py with the line app = FastAPI().
 > - --reload: make the server restart after code changes. Only do this for development.
 
@@ -29,12 +35,3 @@ Data validation and settings management using python type annotations. pydantic 
 
 This module provides runtime support for type hints. The most fundamental support consists of the types Any, Union, Callable, TypeVar, and Generic, You can consult [The official documentation of Typing.](https://docs.python.org/3/library/typing.html) 
 
-# PYTEST
-
-run the next command to verify all link made it work as we expected
-
-    pytest -v
-
-> Note: all functions and file name must start with `test` and followed with a `_`
-
-You can consult [The official documentation of Pytest](https://docs.pytest.org/en/7.1.x/) for more commands and examples.

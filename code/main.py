@@ -1,6 +1,8 @@
 from lib2to3.pytree import Base
 from typing import Union
+from typing_extensions import Self
 from urllib import response
+from urllib.request import Request
 from fastapi import FastAPI
 from typing import List
 from pydantic import BaseModel
@@ -16,6 +18,10 @@ class Cliente(BaseModel):
 
 class respuestas(BaseModel):
     mensaje: str
+
+class clientesNE(BaseModel):
+    nombre: str
+    email: str
 
 app = FastAPI()
 
@@ -42,10 +48,10 @@ async def read_an_item(id: int):
         return response
 
 @app.post("/clientes/", response_model=respuestas)
-async def add_an_item(nombre: str, email: str):
+async def add_an_item(cliente: clientesNE):
     with sqlite3.connect('code/sql/clientes.sqlite') as connection:
         cursor = connection.cursor()
-        cursor.execute('insert into clientes(nombre, email) values ("{}","{}");'.format(nombre,email))
+        cursor.execute('insert into clientes(nombre, email) values ("{}","{}");'.format(cliente.nombre,cliente.email))
         connection.commit()
         response = {
             "mensaje": "Cliente agregado"
@@ -53,17 +59,17 @@ async def add_an_item(nombre: str, email: str):
         return response
     
 @app.put("/clientes/", response_model=respuestas)
-async def update_an_item(nombre: str, email: str, id: int):
+async def update_an_item(cliente: Cliente):
     with sqlite3.connect('code/sql/clientes.sqlite') as connection:
         cursor = connection.cursor()
-        cursor.execute('update clientes set nombre = "{}", email = "{}" where id_cliente = {};'.format(nombre,email,id))
+        cursor.execute('update clientes set nombre = "{}", email = "{}" where id_cliente = {};'.format(cliente.nombre,cliente.email,cliente.id_cliente))
         connection.commit()
         response = {
             "mensaje": "Cliente actualizado"
         }
         return response
 
-@app.delete("/clientes/", response_model=respuestas)
+@app.delete("/clientes/{id}", response_model=respuestas)
 async def delete_an_item(id: int):
     with sqlite3.connect('code/sql/clientes.sqlite') as connection:
         cursor = connection.cursor()
