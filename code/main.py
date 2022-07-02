@@ -10,6 +10,7 @@ from pydantic import BaseModel
 import sqlite3
 import os
 import hashlib
+from fastapi.middleware.cors import CORSMiddleware
 
 DATABASE_URL = os.path.join("code/sql/proyecto.sqlite")
 
@@ -36,6 +37,18 @@ app = FastAPI()
 
 security = HTTPBasic()
 
+origins = [
+    "http://localhost:8080",
+    "http://0.0.0.0:8080",
+    ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins="*",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def get_current_level(credentials: HTTPBasicCredentials = Depends(security)):
     password_b = hashlib.md5(credentials.password.encode())
