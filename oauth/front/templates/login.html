@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <header>
+        <tittle>Log in</tittle>
+    </header>
+     <body>
+        <div class="flex-container">
+            <div class="content-container">
+              <div class="form-container">
+                <form>
+                  <h1>
+                    Log in
+                  </h1>
+                  <br>
+                  <br>
+                  <span class="subtitle">EMAIL:</span>
+                  <br>
+                  <input type="text" name="Email" id="Email">
+                  <br>
+                  <span class="subtitle">PASSWORD:</span>
+                  <br>
+                  <input type="password" name="password" id="Password">
+                  <input type="button" value="Sing up" class="astext" onclick="redirect()"></input>
+
+                    <br><br>
+                  <input type="button" value="Log in" class="submit-btn" onclick="getToken()">
+                  <br>
+                </form>
+              </div>
+            </div>
+          </div>
+        <script type="" src="/static/js/main.js"></script>
+        <script>
+          function redirect(){
+              console.log("redirect");
+              window.location.replace("singup.html");
+          }
+      </script>
+     </body>

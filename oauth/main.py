@@ -1,17 +1,25 @@
 from urllib import response
 from fastapi import FastAPI, HTTPException, status, Depends, Security, Request
-from fastapi.security import HTTPBasic, HTTPBasicCredentials
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials, HTTPBasic, HTTPBasicCredentials
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
-
 import hashlib
-
+from pydantic import BaseModel
 import pyrebase
-
 
 app = FastAPI()
 
+origins = ["*"
+    ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 firebaseConfig = {
     "apiKey": "AIzaSyCTVRE5UN_6skjR33-c2HwKu9NBv_0oeag",
@@ -29,14 +37,12 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 db = firebase.database()
 
-email = "owo@email.com"
-
-password_b = hashlib.md5("password".encode())
-password = password_b.hexdigest()
-
 securityBasic = HTTPBasic()
 securityBearer = HTTPBearer()
 
+class clientesNE(BaseModel):
+    email: str
+    password: str
 
 @app.get("/", include_in_schema=False)
 def root():
@@ -45,15 +51,15 @@ def root():
 @app.get(
     "/user/validate/",
     status_code=status.HTTP_202_ACCEPTED,
-    summary="Get a token for a user",
-    description="Get a token for a user",
+    summary="log in",
+    description="log in",
     tags=["auth"],
   )
 async def get_token(credentials: HTTPBasicCredentials = Depends(securityBasic)):
     try:
       user = credentials.username
       password = credentials.password
-      user = auth.sign_in_with_email_and_password(email, password)
+      user = auth.sign_in_with_email_and_password(user, password)
       response = {
         "token": user['idToken'],
       }
@@ -81,3 +87,26 @@ async def get_token_bearer(credentials: HTTPAuthorizationCredentials =  Depends(
     except Exception as e:
       print(f"Error: {e}")
       raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=e)
+
+@app.post(
+  "/signup/",
+  status_code=status.HTTP_202_ACCEPTED,
+  summary="Create a user",
+  description="create a user",
+  tags=["auth"],
+)
+async def create_user_post(cliente: clientesNE):
+    try:
+      user = auth.create_user_with_email_and_password(cliente.email, cliente.password)
+      userI = auth.get_account_info(user['idToken'])
+      uid = userI['users'][0]['localId']
+      db.child("users").child(uid).set({"email": cliente.email, "nivel": "1"})
+
+      response = {
+        "message": "User created successfully",
+      }
+      return response
+    except Exception as e:
+      print(f"Error: {e}")
+      raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=e)
+
