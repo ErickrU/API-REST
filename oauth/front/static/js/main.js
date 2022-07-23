@@ -62,7 +62,8 @@ function singup(){
         "email": Email.value,
         "password": Password.value
     }
-
+    //console.log(payload);
+    
     var request = new XMLHttpRequest();
     request.open('POST', 'http://127.0.0.1:8000/signup/');
     request.setRequestHeader('Content-Type', 'application/json');
