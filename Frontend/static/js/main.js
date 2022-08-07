@@ -1,19 +1,21 @@
 function login(token){
 
-    token = JSON.parse(token);
-    sessionStorage.setItem("token", token.token);
+    sessionStorage.setItem("token", token);
 
     var request = new XMLHttpRequest();
     request.open('GET', 'http://127.0.0.1:8000/user/');
-    request.setRequestHeader("Authorization", "Bearer " + token.token);
+    request.setRequestHeader("Authorization", "Bearer " + token);
     request.setRequestHeader('Content-Type', 'application/json');
     request.setRequestHeader('Accept', 'application/json');
 
     request.onload = function() {
         const status = request.status;
-
+        console.log(status);
         if (status === 202) {
             window.location.replace("welcome.html");
+        }
+        else{
+            sessionStorage.removeItem("token");
         }
     }
 
@@ -22,26 +24,43 @@ function login(token){
 }
 
 function getToken(){
+    
+    if (token = sessionStorage.getItem("token") == null){
+        let Email = document.getElementById("Email");
+        let Password = document.getElementById("Password");
 
-    let Email = document.getElementById("Email");
-    let Password = document.getElementById("Password");
-
-
-    var request = new XMLHttpRequest();
-    request.open('GET', 'http://127.0.0.1:8000/user/validate/');
-    request.setRequestHeader("Authorization", "Basic " + btoa(Email.value + ":" + Password.value));
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.setRequestHeader('Accept', 'application/json');
-
-    request.onload = function() {
-        const status = request.status;
-
-        if (status === 202) {
-           login(request.responseText);
+        if (Email.value == "" || Password.value == ""){
+            console.log("Empty fields");
         }
+        else{
+
+        var request = new XMLHttpRequest();
+        request.open('GET', 'http://127.0.0.1:8000/user/validate/');
+        request.setRequestHeader("Authorization", "Basic " + btoa(Email.value + ":" + Password.value));
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader('Accept', 'application/json');
+
+        request.onload = function() {
+            const status = request.status;
+
+            if (status === 202) {
+                token = request.responseText
+                token = JSON.parse(token);
+                token = token.token;
+                login(token);
+            }
+        }
+
+        request.send();
     }
 
-    request.send();   
+    }
+    else{
+        token = sessionStorage.getItem("token");
+        login(token);
+    }
+
+        
 }
 
 function singup(){

@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Knight - Free Bootstrap 4 Product Landing Page Template</title>
+    <title>Welcome</title>
     <meta name="description"
           content="Knight is a beautiful Bootstrap 4 template for product landing pages."/>
 
@@ -33,22 +33,7 @@
                     aria-label="Toggle navigation">
                 <span data-feather="grid"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#features">soon</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#pricing">soon</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#faq">soon</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#blog">soon</a>
-                    </li>
-                </ul>
-            </div>
+
         </nav>
     </div>
 </section>
@@ -62,6 +47,10 @@
                 <p class="lead py-3">you're logged in</p>
                 <button class="btn btn-primary d-inline-flex flex-row align-items-center" onclick="reditrect()">
                     Log out
+                    <em class="ml-2" data-feather="arrow-right"></em>
+                </button>
+                <button class="btn btn-primary d-inline-flex flex-row align-items-center" onclick="reditrect2()">
+                    Show clients
                     <em class="ml-2" data-feather="arrow-right"></em>
                 </button>
             </div>
@@ -81,6 +70,9 @@
     function reditrect(){
         sessionStorage.clear();
         window.location.replace("login.html");
+    }
+    function reditrect2(){
+        window.location.replace("index.html");
     }
 </script>
 </body>
